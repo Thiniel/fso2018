@@ -1,0 +1,30 @@
+title Tallenna uusi muistiinpano
+
+kayttaja -> selain:
+
+note left of selain
+Käyttäjä syöttää uuden muistiinpanon ja klikkaa Talleta nappia.
+end note
+
+note left of selain
+JavaScriptissä otetaan kiinni notes_form form elementin onsubmit event.
+Oletus submit toiminnallisuus estetään ja käyttäjän antama muistiinpanosta
+tehdään JSON objekti joka lisätään selaimen muistissa olevaan notes listaan.
+JSON lista käsitellään muodostaen HTML listan joka lisätään sivun DOM
+objektiin notes id DIV elementtiin jolloin käyttäjä näkee muistiinpanot sisältäen
+oman lisäämänsä muistiinpanon selaimessa.
+Samassa onsubmit eventissä viimeiseksi käyttäjän syöttämä muistiinpano lähetetään palvelimelle.
+end note
+
+selain -> palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note left of palvelin
+Palvelin saa POST viestin bodyssä lähetetyn muistiinpanon ja tallettaa
+sen palvelimen muistissa olevaan muistiinpano listaan.
+end note
+
+palvelin -> selain: status 201, "note created" JSON message
+
+note left of selain
+Palvelimelta saatu vastaus kirjoitetaan selaimen konsoliin.
+end note

@@ -1,0 +1,35 @@
+title Näytä muistiinpanot
+
+kayttaja -> selain:
+
+note left of selain
+Käyttäjä kirjoittaa selaimeen https://fullstack-exampleapp.herokuapp.com/spa osoitteen
+end note
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/spa
+
+note left of palvelin
+Muodostetaan HTML-sivu muistiinpanojen näyttämiselle ja tallentamiselle
+end note
+
+palvelin -> selain: status 200, HTML sivu
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+palvelin -> selain: status 200, CSS -tyylitiedosto
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/spa.js
+palvelin -> selain: status 200, JavaScript tiedosto
+
+note left of selain
+Selain näyttää notes sivun ja suorittaa spa.js tiedoston JavaScriptin.
+Scriptissä pyydetään hakemaan https://fullstack-exampleapp.herokuapp.com/data.json sivu.
+end note
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+palvelin -> selain: status 200, JSON tiedosto
+
+note left of selain
+Kun palvelin palauttaa data.json tiedoston, niin käsitellään JSON data muodostaen 
+HTML listan ja lisätään lista sivun DOM objektiin DIV elementtiin
+jonka id on 'notes' jolloin käyttäjä näkee muistiinpanot selaimessaan.
+end note

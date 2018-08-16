@@ -1,0 +1,40 @@
+title Tallenna uusi muistiinpano
+
+kayttaja -> selain:
+
+note left of selain
+Käyttäjä syöttää uuden muistiinpanon ja klikkaa Talleta nappia
+end note
+
+selain -> palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note
+
+note left of palvelin
+Palvelin saa POST viestin bodyssä lähetetyn muistiinpanon ja tallettaa
+sen palvelimen muistissa olevaan muistiinpano listaan.
+end note
+
+palvelin -> selain: status 302, redirect /notes sivulle
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/notes
+palvelin -> selain: status 200, HTML sivu
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+palvelin -> selain: status 200, CSS tyylitiedosto
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.js
+palvelin -> selain: status 200, JavaScript tiedosto
+
+note left of selain
+Selain näyttää notes sivun ja suorittaa main.js tiedoston JavaScriptin.
+Scriptissä pyydetään hakemaan https://fullstack-exampleapp.herokuapp.com/data.json sivu.
+end note
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+palvelin -> selain: status 200, JSON tiedosto
+
+note left of selain
+Kun palvelin palauttaa data.json tiedoston, niin käsitellään JSON data muodostaen 
+HTML listan ja lisätään lista sivun DOM objektiin DIV elementtiin
+jonka id on 'notes' jolloin käyttäjä näkee muistiinpanot selaimessaan.
+Sisältäen itse lisäämänsä muistiinpanon.
+end note
